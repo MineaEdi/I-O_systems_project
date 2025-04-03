@@ -10,8 +10,8 @@ adc = ADC(Pin(26))         # ADC0 pe GP26
 buton = Pin(14, Pin.IN, Pin.PULL_UP)  # Buton pe GP14
 
 # Parametri esantionare
-num_samples = 3000
-delay = 35  # 35us => 28kHz
+num_samples = 512
+delay = 40  # 40us => 25kHz
 
 while 1:
     print("READY")
@@ -22,12 +22,16 @@ while 1:
     print("Buton apasat! Astept 500ms...")
     time.sleep(0.5)
 
-    # Trimit esantioanele pe seriala
+    values = []
+    
     for i in range(num_samples):
         val = adc.read_u16()
         voltaj = val * 3.3 / 65535 * 1000
-        print(f"{i},{voltaj}") # trimiterea
+        values.append(voltaj)
         time.sleep_us(delay)
 
-    print("DONE")
+    for i, val in enumerate(values):
+        print(f"{i},{val}") # trimitere pe seriala
 
+    print("DONE")
+    
