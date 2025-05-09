@@ -19,7 +19,7 @@ while 1:
     while buton.value():
         time.sleep(0.01)
 
-    print("Buton apasat! Astept 500ms...")
+    #print("Buton apasat! Astept 500ms...")
     time.sleep(0.5)
 
     values = []
@@ -31,7 +31,7 @@ while 1:
         time.sleep_us(delay)
 
     for i, val in enumerate(values):
-        print(f"{i},{val}") # trimitere pe seriala
+        print(f"{val}") # trimitere pe seriala
 
     print("DONE")
     

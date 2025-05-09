@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 PORT = "COM5"
 BAUDRATE = 115200  # implicit pentru Pico
 
-output_file = "vowels\\date_adc_O_1.txt"
+output_file = "vowels\\recognize.txt"
 
-with serial.Serial(PORT, BAUDRATE, timeout=1) as ser, open(output_file, "w") as f:
+with serial.Serial(PORT, BAUDRATE, timeout=1) as ser:#, open(output_file, "w") as f:
     print(f"Astept date de la Pico pe portul {PORT}...")
 
     start = False
@@ -20,19 +20,19 @@ with serial.Serial(PORT, BAUDRATE, timeout=1) as ser, open(output_file, "w") as 
             print("Transmisie terminata!")
             break
         elif line:
-            if "," in line:
-                f.write(line + "\n")
-                print(line)
+            #f.write(line + "\n")
+            print(line)
 
 x = []
 y = []
+cnt = 0
 
 with open(output_file, "r") as f:
     for line in f:
-        parts = line.strip().split(",")
-        if len(parts) == 2:
-            x.append(int(parts[0]))
-            y.append(float(parts[1]))
+        value = line.strip()
+        x.append(int(cnt))
+        y.append(float(value))
+        cnt += 1
 
 # Plot
 plt.xlim(0, 512)
